@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class RangeTower : MonoBehaviour
+public class RangeTower : MonoBehaviour, ITower
 {
     public int maxHealth = 10;
     public int damageAmount = 4;

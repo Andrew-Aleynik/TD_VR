@@ -41,6 +41,8 @@ public class BaseEnemy : MonoBehaviour, IEnemy
         }
     }
 
+    /* Ты проверяешь число элементов в towersInRange. Если их 0, и ты идешь в ветку else,
+     ты физически не можешь перебирать элементы списка*/
     private bool HasTargetsInAttackRange()
     {
         if (towersInRange.Count > 0) {
