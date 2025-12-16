@@ -10,6 +10,11 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if (target == null || (target as UnityEngine.Object) == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         if (canMove)
         {
             Transform enemyTransform = target.GetTransform();
@@ -36,16 +41,11 @@ public class Projectile : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        IEnemy enemy = other.GetComponent<IEnemy>();
-        if (enemy != null && enemy == target)
-        {
-            target.TakeDamage(damageAmount);
-            Destroy(gameObject);
+            else if (distanceToTarget < 1f) 
+            {
+                target.TakeDamage(damageAmount);
+                Destroy(gameObject);
+            }
         }
     }
 

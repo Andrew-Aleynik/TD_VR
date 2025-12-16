@@ -12,10 +12,14 @@ public class BaseEnemy : MonoBehaviour, IEnemy
     private List<ITower> towersInRange = new List<ITower>();
     private float attackCooldown = 0f;
     public float attackInterval = 1f;
+    public HPBar hpBar;
 
     void Start()
     {
         health = GetMaxHealth();
+        transform.rotation = Quaternion.LookRotation(movementDirection);
+        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.Show();
     }
 
     void Update()
@@ -41,23 +45,12 @@ public class BaseEnemy : MonoBehaviour, IEnemy
         }
     }
 
-    /* Ты проверяешь число элементов в towersInRange. Если их 0, и ты идешь в ветку else,
-     ты физически не можешь перебирать элементы списка*/
     private bool HasTargetsInAttackRange()
     {
-        if (towersInRange.Count > 0) {
-            return true;
-        } else {
-            foreach (ITower tower in towersInRange) {
-                if (tower.IsMount()) {
-                    return true;
-                }
-            }
-            return false;
-        }
+        return towersInRange.Count > 0;
     }
 
-    private void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
@@ -70,7 +63,6 @@ public class BaseEnemy : MonoBehaviour, IEnemy
             if (!towersInRange.Contains(tower))
             {
                 towersInRange.Add(tower);
-                Debug.Log("Цель вошла в радиус атаки: " + other.name);
             }
         }
     }
@@ -81,16 +73,16 @@ public class BaseEnemy : MonoBehaviour, IEnemy
         if (towersInRange.Contains(tower))
         {
             towersInRange.Remove(tower);
-            Debug.Log("Цель вышла из радиуса атаки: " + other.name);
         }
     }
 
     private ITower GetTowerToAttack() 
     {
-        foreach (ITower tower in towersInRange)
+        towersInRange.RemoveAll(tower => 
+        tower == null || (tower as UnityEngine.Object) == null);
+        if (towersInRange.Count > 0)
         {
-            if (!tower.IsMount()) continue;
-            return tower;
+            return towersInRange[0];
         }
         return null;
     }
@@ -108,6 +100,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        hpBar.SetValue(GetMaxHealth(), health);
         if (health <= 0)
         {
             Die();

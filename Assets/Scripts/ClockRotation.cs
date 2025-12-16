@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class ClockRotation : MonoBehaviour
 {
-    public Transform arrow_point;
-    private Transform start_pos;
+    public Transform arrowPoint;
+    private Transform startPos;
 
     private void Start()
     {
-        start_pos = arrow_point;
+        startPos = arrowPoint;
     }
 
-    public void rotate_arrow(float pos)
+    public void SetRotation(float seconds)
     {
-        arrow_point.rotation = start_pos.rotation;
-        arrow_point.Rotate(0, pos * 6, 0);
+        arrowPoint.rotation = startPos.rotation;
+        arrowPoint.Rotate(0, seconds * 6, 0);
     }
 
 }

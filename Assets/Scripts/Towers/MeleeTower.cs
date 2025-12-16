@@ -11,10 +11,13 @@ public class MeleeTower : MonoBehaviour, ITower
     private bool mount = false;
 
     public AttackZone Attack_zone;
+    public HPBar hpBar;
 
     void Start()
     {
         health = GetMaxHealth();
+        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.Hide();
     }
 
     void Update()
@@ -46,10 +49,12 @@ public class MeleeTower : MonoBehaviour, ITower
 
     private List<IEnemy> GetAvailableEnemies()
     {
-       return Attack_zone.Enemies;
+        Attack_zone.Enemies.RemoveAll(enemy => 
+        enemy == null || (enemy as UnityEngine.Object) == null);
+        return Attack_zone.Enemies;
     }
 
-    private void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
@@ -67,11 +72,13 @@ public class MeleeTower : MonoBehaviour, ITower
     public void Mount()
     {
         mount = true;
+        hpBar.Show();
     }
 
     public void Unmount()
     {
         mount = false;
+        hpBar.Hide();
     }
 
     public bool IsMount()
@@ -87,8 +94,10 @@ public class MeleeTower : MonoBehaviour, ITower
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        hpBar.SetValue(GetMaxHealth(), health);
         if (health <= 0)
         {
+            hpBar.Hide();
             Die();
         }
     }

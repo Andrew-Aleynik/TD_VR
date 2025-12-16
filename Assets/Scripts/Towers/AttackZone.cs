@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AttackZone : MonoBehaviour
 {
-    private List<IEnemy> enemies;
+    private List<IEnemy> enemies = new List<IEnemy>();
     public List<IEnemy> Enemies { get { return enemies; } }
 
     private void OnTriggerEnter(Collider other)

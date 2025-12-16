@@ -13,10 +13,13 @@ public class RangeTower : MonoBehaviour, ITower
     private List<IEnemy> enemiesInRange = new List<IEnemy>();
     private int health;
     private bool mount = false;
+    public HPBar hpBar;
 
     void Start()
     {
         health = GetMaxHealth();
+        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.Hide();
     }
 
     void Update()
@@ -92,7 +95,7 @@ public class RangeTower : MonoBehaviour, ITower
         return availableEnemies;
     }
 
-    private void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
@@ -113,10 +116,6 @@ public class RangeTower : MonoBehaviour, ITower
             projectileScript.SetDamageAmount(GetDamageAmount());
             projectileScript.Fly();
         }
-        else
-        {
-            Debug.LogError("Projectile prefab doesn't have Projectile script!");
-        }
     }
 
     public void Attack(IEnemy enemy)
@@ -132,11 +131,13 @@ public class RangeTower : MonoBehaviour, ITower
     public void Mount()
     {
         mount = true;
+        hpBar.Show();
     }
 
     public void Unmount()
     {
         mount = false;
+        hpBar.Hide();
     }
 
     public bool IsMount()
@@ -152,8 +153,10 @@ public class RangeTower : MonoBehaviour, ITower
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        hpBar.SetValue(GetMaxHealth(), health);
         if (health <= 0) 
         {
+            hpBar.Hide();
             Die();
         }
     }
