@@ -7,12 +7,12 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadGame()
     {
-        SceneManager.LoadScene("NewScene");
+        SceneManager.LoadScene("New Scene");
     }
 
     public void LoadTops()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("Tops");
     }
 
     public void QuitGame()
