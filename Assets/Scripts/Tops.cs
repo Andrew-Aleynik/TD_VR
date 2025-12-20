@@ -7,6 +7,7 @@ public class Tops : MonoBehaviour
 {
     private List<Tuple<string, float>> _tops_array;
     public TextMeshProUGUI text_mesh;
+    public RecordManager record_manager;
     private void OnEnable()
     {
         _tops_array = new List<Tuple<string, float>>();
@@ -46,7 +47,7 @@ public class Tops : MonoBehaviour
         PlayerPrefs.SetString("Tops", string_to_save);
         PlayerPrefs.Save();
     }
-    /* данные сохраняются в виде строки имя/очки;имя/очки;имя/очки; */
+    
     private string MakeStringFromData(List<Tuple<string, float>> _data)
     {
         var string_to_save = string.Empty;
