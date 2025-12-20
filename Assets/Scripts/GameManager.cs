@@ -9,17 +9,16 @@ public class GameManager : MonoBehaviour
     public MaterialSpawnSystem materialSpawnSystem;
     public EnemySpawnSystem enemySpawnSystem;
     public ClockRotation clockRotation;
-    public GameObjectPool enemyPool = new GameObjectPool(20);
-    public GameObjectPool materialPool = new GameObjectPool(20);
-    public GameObjectPool towerPool = new GameObjectPool(20);
-    public GameObjectPool projectilePool = new GameObjectPool(10);
+    public GameObjectPool enemyPool = new GameObjectPool(50);
+    public GameObjectPool materialPool = new GameObjectPool(100);
+    public GameObjectPool towerPool = new GameObjectPool(50);
+    public GameObjectPool projectilePool = new GameObjectPool(200);
     public SceneLoader sceneLoader;
     private int currentWave;
     public int totalWaves;
     public List<int> enemyNumber;
     public List<int> materialNumber;
     private float time;
-    private float totalTime;
     private int score;
     private bool isGameEnd = true;
     public float assembly_time = 30f;
@@ -47,7 +46,6 @@ public class GameManager : MonoBehaviour
         currentWave = 0;
         score = 0;
         time = 0.0f;
-        totalTime = 0.0f;
         isGameEnd = false;
         gameState = ASSEMBLY_STATE;
 

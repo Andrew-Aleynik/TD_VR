@@ -69,7 +69,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239263326181764543}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -247,9 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa92d873af8d3d54c9f55ad0390e43f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeTower
-  maxHealth: 10
+  maxHealth: 15
   damageAmount: 2
-  attackInterval: 0.5
+  attackInterval: 0.6
   Attack_zone: {fileID: 7800382004094688450}
   hpBar: {fileID: 332355281437680173}
 --- !u!1 &2560659186510820889
@@ -304,8 +304,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.58366203, y: 0.61366737, z: 0.7885447}
-  m_Center: {x: -0.011060715, y: 0.011670113, z: -0.10572764}
+  m_Size: {x: 0.58366203, y: 0.61366737, z: 4.0722675}
+  m_Center: {x: -0.011060715, y: 0.011670113, z: 1.5361338}
 --- !u!114 &7800382004094688450
 MonoBehaviour:
   m_ObjectHideFlags: 0
