@@ -5,7 +5,7 @@ public class RangeTower : MonoBehaviour, ITower
 {
     public int maxHealth = 10;
     public int damageAmount = 4;
-    public Collider attackRange;
+    public AttackZone attackZone;
     public float attackInterval = 1f;
     public GameObject projectilePrefab;
     public Transform projectileStartPosition;
@@ -45,54 +45,18 @@ public class RangeTower : MonoBehaviour, ITower
 
     private bool HasTargetsInAttackRange()
     {
-        return GetAvailableEnemies().Count > 0;
+        attackZone.Enemies.RemoveAll(enemy => 
+        enemy == null || (enemy as UnityEngine.Object) == null);
+        return attackZone.Enemies.Count > 0;
     }
 
     private IEnemy GetEnemyToAttack()
     {
-        List<Collider> enemies = GetAvailableEnemies();
-
-        Collider nearestEnemy = null;
-        float nearestDistance = float.MaxValue;
-
-        foreach (Collider enemy in enemies)
+        if (attackZone.Enemies.Count > 0) 
         {
-            if (enemy == null) continue;
-            
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < nearestDistance)
-            {
-                nearestDistance = distance;
-                nearestEnemy = enemy;
-            }
+            return attackZone.Enemies[0];
         }
-
-        return nearestEnemy.GetComponent<IEnemy>();
-    }
-
-    private List<Collider> GetAvailableEnemies()
-    {
-        List<Collider> availableEnemies = new List<Collider>();
-
-        if (attackRange is BoxCollider boxCollider)
-        {
-            Vector3 center = attackRange.transform.TransformPoint(boxCollider.center);
-            Vector3 halfExtents = boxCollider.size * 0.5f;
-            Quaternion orientation = attackRange.transform.rotation;
-
-            Collider[] colliders = Physics.OverlapBox(center, halfExtents, orientation);
-
-        
-            foreach (Collider col in colliders)
-            {
-                if (col.GetComponent<IEnemy>() != null)
-                {
-                    availableEnemies.Add(col);
-                }
-            }
-        }
-
-        return availableEnemies;
+        return null;
     }
 
     public void Die()
@@ -107,6 +71,7 @@ public class RangeTower : MonoBehaviour, ITower
             projectileStartPosition.position,
             projectileStartPosition.rotation
         );
+        GameManager.Instance.projectilePool.Add(projectileInstance);
         
         Projectile projectileScript = projectileInstance.GetComponent<Projectile>();
         

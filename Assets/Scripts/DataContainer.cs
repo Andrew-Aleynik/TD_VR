@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class DataContainer
 {
-    public static float time = 1f;
+    public static int score = 0;
     public static bool game_happend = false;
-    public static bool AK_returned = false;
 }

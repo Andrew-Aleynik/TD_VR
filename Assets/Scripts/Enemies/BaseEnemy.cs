@@ -53,6 +53,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy
     public void Die()
     {
         Destroy(gameObject);
+        GameManager.Instance.AddScore(GetValue());
     }
 
     private void OnTriggerEnter(Collider other)
