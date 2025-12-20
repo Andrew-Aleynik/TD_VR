@@ -78,6 +78,7 @@ public class AssemblyManager : MonoBehaviour
 {
     public List<Recipe> recipes;
     public Transform towerSpawnPoint;
+    public GameObject defaultTower;
 
     private Hashtable materialsCounts = new Hashtable();
 
@@ -131,9 +132,25 @@ public class AssemblyManager : MonoBehaviour
                 // Debug.Log("Рецепт выполнен! Создаем башню...");
                 ClearMaterialCounts();
                 CreateTower(recipe.GetTower());
-                break;
+                return;
             }
         }
+
+        if (CountMaterials() == 3)
+        {
+            ClearMaterialCounts();
+            CreateTower(defaultTower);
+        }
+    }
+
+    private int CountMaterials()
+    {
+        int count = 0;
+        foreach(DictionaryEntry materialCount in materialsCounts)
+        {
+            count += (int)materialCount.Value;
+        }
+        return count;
     }
 
     private void CreateTower(GameObject towerPrefab)

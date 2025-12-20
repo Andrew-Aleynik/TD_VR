@@ -7,9 +7,16 @@ public class Projectile : MonoBehaviour
     private IEnemy target;
     private int damageAmount;
     private bool canMove = false;
+    private float timeToLive = 3f;
 
     void Update()
     {
+        timeToLive -= Time.deltaTime;
+        if (timeToLive <= 0f)
+        {
+            Destroy(gameObject);
+            return;
+        }
         if (target == null || (target as UnityEngine.Object) == null)
         {
             Destroy(gameObject);

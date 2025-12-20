@@ -49,11 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  speed: 2.5
-  maxHealth: 7
+  speed: 2.1
+  maxHealth: 10
   value: 3
   movementDirection: {x: 0, y: 0, z: -1}
-  attackInterval: 1.5
+  attackInterval: 1.2
   hpBar: {fileID: 4621457778511495676}
 --- !u!65 &7074396613233733885
 BoxCollider:
