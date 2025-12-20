@@ -85,7 +85,7 @@ public class AssemblyManager : MonoBehaviour
     {
         GameObject addedMaterial = args.interactableObject.transform.gameObject;
         string materialTag = addedMaterial.tag;
-        Debug.Log("Объект с тегом: " + materialTag + " добавлен");
+        // Debug.Log("Объект с тегом: " + materialTag + " добавлен");
         ChangeCountOfMaterial(materialTag, 1);
         Build();
     }
@@ -94,7 +94,7 @@ public class AssemblyManager : MonoBehaviour
     {
         GameObject removedMaterial = args.interactableObject.transform.gameObject;
         string materialTag = removedMaterial.tag;
-        Debug.Log("Объект с тегом: " + materialTag + " удален");
+        // Debug.Log("Объект с тегом: " + materialTag + " удален");
         ChangeCountOfMaterial(materialTag, -1);
     }
 
@@ -119,7 +119,7 @@ public class AssemblyManager : MonoBehaviour
             materialsCounts.Add(materialTag, change);
         }
 
-        DebugMaterialsCount();
+        // DebugMaterialsCount();
     }
 
     private void Build()
@@ -128,7 +128,7 @@ public class AssemblyManager : MonoBehaviour
         {
             if (recipe.CanBuild(materialsCounts))
             {
-                Debug.Log("Рецепт выполнен! Создаем башню...");
+                // Debug.Log("Рецепт выполнен! Создаем башню...");
                 ClearMaterialCounts();
                 CreateTower(recipe.GetTower());
                 break;
@@ -140,18 +140,20 @@ public class AssemblyManager : MonoBehaviour
     {
         if (towerPrefab == null)
         {
-            Debug.LogError("Префаб башни не назначен в рецепте!");
+            // Debug.LogError("Префаб башни не назначен в рецепте!");
             return;
         }
 
+        GameObject tower;
         if (towerSpawnPoint != null)
         {
-            Instantiate(towerPrefab, towerSpawnPoint.position, towerSpawnPoint.rotation);
+            tower = Instantiate(towerPrefab, towerSpawnPoint.position, towerSpawnPoint.rotation);
         }
         else
         {
-            Instantiate(towerPrefab, transform.position, transform.rotation);
+            tower = Instantiate(towerPrefab, transform.position, transform.rotation);
         }
+        GameManager.Instance.towerPool.Add(tower);
     }
 
     private void ClearMaterialCounts()
@@ -166,7 +168,7 @@ public class AssemblyManager : MonoBehaviour
         }
 
         materialsCounts.Clear();
-        Debug.Log("Материалы очищены");
+        // Debug.Log("Материалы очищены");
     }
 
     private void DebugMaterialsCount()

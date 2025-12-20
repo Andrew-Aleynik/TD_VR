@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class Tops : MonoBehaviour
 {
-    private List<Tuple<string, float>> _tops_array;
+    private List<Tuple<string, int>> _tops_array;
     public TextMeshProUGUI text_mesh;
     public RecordManager record_manager;
     private void OnEnable()
     {
-        _tops_array = new List<Tuple<string, float>>();
+        _tops_array = new List<Tuple<string, int>>();
         LoadData();
         UpdateDisplay();
     }
-    public void AddData(string Name, float time)
+    public void AddData(string Name, int score)
     {
-        _tops_array.Add(new Tuple<string, float>(Name, time));
+        _tops_array.Add(new Tuple<string, int>(Name, score));
         _tops_array.Sort((a, b) => a.Item2.CompareTo(b.Item2));
         if (_tops_array.Count > 10)
         {
@@ -35,7 +35,7 @@ public class Tops : MonoBehaviour
             foreach(var _tops in _array)
             {
                 var _data = _tops.Split("/", StringSplitOptions.RemoveEmptyEntries);
-                _tops_array.Add(new Tuple<string, float>(_data[0], float.Parse(_data[1])));
+                _tops_array.Add(new Tuple<string, int>(_data[0], int.Parse(_data[1])));
             }
             _tops_array.Sort((a, b) => a.Item2.CompareTo(b.Item2));
         }
@@ -47,8 +47,8 @@ public class Tops : MonoBehaviour
         PlayerPrefs.SetString("Tops", string_to_save);
         PlayerPrefs.Save();
     }
-    
-    private string MakeStringFromData(List<Tuple<string, float>> _data)
+
+    private string MakeStringFromData(List<Tuple<string, int>> _data)
     {
         var string_to_save = string.Empty;
         foreach(var elem in _data)
@@ -65,7 +65,7 @@ public class Tops : MonoBehaviour
         var num = 1;
         foreach (var elem in _tops_array)
         {
-            text_mesh.text += num.ToString() + ". " + elem.Item1 + " ________ " + elem.Item2 + " points\n" ;
+            text_mesh.text += num.ToString() + ". " + elem.Item1 + " ________ " + elem.Item2 + " очков\n" ;
             num += 1;
         }
     }

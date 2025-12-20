@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3479770419620657696}
   - component: {fileID: 1823677609078903461}
+  - component: {fileID: 8810396824539203040}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -53,6 +54,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0473968, y: 1.2463295, z: 12}
   m_Center: {x: -0.027370274, y: 0.5768353, z: 6}
+--- !u!114 &8810396824539203040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2346520304815877974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0c814bc2f43bb4fa9b29a4de4afc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4460574284904303489
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   damageAmount: 4
-  attackRange: {fileID: 1823677609078903461}
+  attackZone: {fileID: 8810396824539203040}
   attackInterval: 1
   projectilePrefab: {fileID: 2358695110610566262, guid: 442750e241f4eb14cbf73eab29a3db72, type: 3}
   projectileStartPosition: {fileID: 6745273606847900486}

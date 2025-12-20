@@ -20,6 +20,7 @@ public class EnemySpawnSystem : SpawnSystem
         Transform spawnPoint = spawnPoints[spawnPointIndex];
         int enemyIndex = GetIndex(enemyWeights);
         GameObject enemy = enemies[enemyIndex];
-        Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        GameObject enemyInstance = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        GameManager.Instance.enemyPool.Add(enemyInstance);
     }
 }

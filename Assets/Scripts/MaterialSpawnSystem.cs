@@ -14,6 +14,7 @@ public class MaterialSpawnSystem : SpawnSystem
     public override void Spawn()
     {
         var materialIndex = GetIndex(materialWeights);
-        Instantiate(materials[materialIndex], spawnPoint.position, Quaternion.identity);
+        GameObject material = Instantiate(materials[materialIndex], spawnPoint.position, Quaternion.identity);
+        GameManager.Instance.materialPool.Add(material);
     }
 }

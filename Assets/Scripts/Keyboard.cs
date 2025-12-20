@@ -13,15 +13,11 @@ public class Keyboard : MonoBehaviour
 
     private void Awake()
     {
-        /*клава по умолчанию отключена. должна включаться только если была игра. Нужно настроить
-         Например, сохранять значение в дата контейнер*/
         this.gameObject.SetActive(DataContainer.game_happend);
         if (DataContainer.game_happend)
         {
             DataContainer.game_happend = false;
-            /* Это надпись, которая спавнится над клавиатурой
-             Через дата контейнер передаются глобальные данные */
-            result.text = "Ваш результат: " + DataContainer.time.ToString() + " сек"; 
+            result.text = "Р’Р°С€ СЂРµР·СѓР»СЊС‚Р°С‚: " + DataContainer.score.ToString() + " РѕС‡РєРѕРІ"; 
         }
     }
     private void Start()
@@ -48,7 +44,7 @@ public class Keyboard : MonoBehaviour
 
     public void Enter()
     {
-        tops.AddData(Name, DataContainer.time);
+        tops.AddData(Name, DataContainer.score);
         Name = "";
         gameObject.SetActive(false);
         UpdateDisplay(Name);
