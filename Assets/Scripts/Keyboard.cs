@@ -17,7 +17,7 @@ public class Keyboard : MonoBehaviour
         if (DataContainer.game_happend)
         {
             DataContainer.game_happend = false;
-            result.text = "Ваш результат: " + DataContainer.score.ToString() + " очков"; 
+            result.text = $"Ваш результат: {DataContainer.score} очков. Волн пережито: {DataContainer.waves}"; 
         }
     }
     private void Start()
@@ -44,7 +44,7 @@ public class Keyboard : MonoBehaviour
 
     public void Enter()
     {
-        tops.AddData(Name, DataContainer.score);
+        tops.AddData(Name, DataContainer.score, DataContainer.waves);
         Name = "";
         gameObject.SetActive(false);
         UpdateDisplay(Name);

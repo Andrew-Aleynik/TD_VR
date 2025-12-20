@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class Base : MonoBehaviour, ILive
 {
-    public int maxHealth;
+    [SerializeField] private int maxHealth;
     private int health;
-    public HPBar hPBar;
+    [SerializeField] private HPBar hPBar;
+
+    private bool _isDie = false;
+    public bool IsDie { get { return _isDie; } }
 
     public void Start()
     {
@@ -41,6 +44,6 @@ public class Base : MonoBehaviour, ILive
     //TODO notify GameManager
     public void Die() 
     {
-        return;
+        _isDie = true;
     }
 }
