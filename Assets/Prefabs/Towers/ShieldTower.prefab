@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6f260b10826a447ab82b021f9f850f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldTower
-  maxHealth: 40
+  MaxHealth: 70
   hpBar: {fileID: 1172213614480194657}
 --- !u!1001 &1045419440415547248
 PrefabInstance:

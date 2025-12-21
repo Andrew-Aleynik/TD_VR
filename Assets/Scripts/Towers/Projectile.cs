@@ -5,7 +5,7 @@ public class Projectile : MonoBehaviour
     public float rotationSpeed = 1f;
     public float speed = 7f;
     private IEnemy target;
-    private int damageAmount;
+    public int damageAmount { get; set; }
     private bool canMove = false;
     private float timeToLive = 3f;
 
@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
         }
         if (canMove)
         {
-            Transform enemyTransform = target.GetTransform();
+            Transform enemyTransform = target.transform;
 
             Vector3 targetPosition = enemyTransform.position;
             
@@ -59,11 +59,6 @@ public class Projectile : MonoBehaviour
     public void SetTarget(IEnemy enemy)
     {
         target = enemy;
-    }
-
-    public void SetDamageAmount(int damageAmount)
-    {
-        this.damageAmount = damageAmount;
     }
 
     public void Fly()

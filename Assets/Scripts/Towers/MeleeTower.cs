@@ -3,26 +3,28 @@ using UnityEngine;
 
 public class MeleeTower : MonoBehaviour, ITower
 {
-    public int maxHealth = 10;
-    public int damageAmount = 2;
+    public int MaxHealth = 10;
+    public int maxHealth => MaxHealth;
+    public int DamageAmount = 2;
+    public int damageAmount => DamageAmount;
     public float attackInterval = 0.5f;
     private float attackCooldown = 0f;
     private int health;
-    private bool mount = false;
+    public bool mount { get; set; } = false;
 
     public AttackZone Attack_zone;
     public HPBar hpBar;
 
     void Start()
     {
-        health = GetMaxHealth();
-        hpBar.SetValue(GetMaxHealth(), health);
+        health = maxHealth;
+        hpBar.SetValue(maxHealth, health);
         hpBar.Hide();
     }
 
     void Update()
     {
-        if (!HasTargetsInAttackRange() || !IsMount())
+        if (!HasTargetsInAttackRange() || !mount)
         {
             return;
         }
@@ -61,12 +63,7 @@ public class MeleeTower : MonoBehaviour, ITower
 
     public void Attack(IEnemy enemy)
     {
-        enemy.TakeDamage(GetDamageAmount());
-    }
-
-    public int GetDamageAmount()
-    {
-        return damageAmount;
+        enemy.TakeDamage(damageAmount);
     }
 
     public void Mount()
@@ -81,20 +78,10 @@ public class MeleeTower : MonoBehaviour, ITower
         hpBar.Hide();
     }
 
-    public bool IsMount()
-    {
-        return mount;
-    }
-
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
-        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.SetValue(maxHealth, health);
         if (health <= 0)
         {
             hpBar.Hide();

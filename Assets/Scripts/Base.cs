@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Base : MonoBehaviour, ILive
 {
-    [SerializeField] private int maxHealth;
+    public int MaxHealth;
+    public int maxHealth => MaxHealth;
+
     private int health;
     [SerializeField] private HPBar hPBar;
 
@@ -21,7 +23,7 @@ public class Base : MonoBehaviour, ILive
         var object_type = other.GetComponent<IEnemy>();
         if (object_type != null)
         {
-            object_type.Die();
+            Destroy(gameObject);
             TakeDamage(1);
         }
     }
@@ -41,7 +43,6 @@ public class Base : MonoBehaviour, ILive
         }
     }
 
-    //TODO notify GameManager
     public void Die() 
     {
         _isDie = true;

@@ -247,9 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa92d873af8d3d54c9f55ad0390e43f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeTower
-  maxHealth: 15
-  damageAmount: 2
-  attackInterval: 0.6
+  MaxHealth: 15
+  DamageAmount: 2
+  attackInterval: 0.5
   Attack_zone: {fileID: 7800382004094688450}
   hpBar: {fileID: 332355281437680173}
 --- !u!1 &2560659186510820889
@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0c814bc2f43bb4fa9b29a4de4afc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackZone
+  towerPosition: {fileID: 7998138392138536577}
 --- !u!1001 &3670792445145696282
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _total_enemies; i++)
         {
             enemySpawnSystem.Spawn();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.2f);
         }
     }
 

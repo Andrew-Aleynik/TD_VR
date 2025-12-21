@@ -3,10 +3,14 @@ using System.Collections.Generic;
 
 public class BaseEnemy : MonoBehaviour, IEnemy
 {
-    public int damageAmount = 2;
-    public float speed = 3f;
-    public int maxHealth = 10;
-    public int value = 5;
+    public int DamageAmount = 2;
+    public int damageAmount => DamageAmount;
+    public float Speed = 3f;
+    public float speed => Speed;
+    public int MaxHealth = 10;
+    public int maxHealth => MaxHealth;
+    public int Value = 5;
+    public int value => Value;
     public Vector3 movementDirection;
     private int health;
     private List<ITower> towersInRange = new List<ITower>();
@@ -16,9 +20,9 @@ public class BaseEnemy : MonoBehaviour, IEnemy
 
     void Start()
     {
-        health = GetMaxHealth();
+        health = maxHealth;
         transform.rotation = Quaternion.LookRotation(movementDirection);
-        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.SetValue(maxHealth, health);
         hpBar.Show();
     }
 
@@ -53,7 +57,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy
     public void Die()
     {
         Destroy(gameObject);
-        GameManager.Instance.AddScore(GetValue());
+        GameManager.Instance.AddScore(value);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,46 +94,21 @@ public class BaseEnemy : MonoBehaviour, IEnemy
 
     public void Attack(ITower tower)
     {
-        tower.TakeDamage(GetDamageAmount());
+        tower.TakeDamage(damageAmount);
     }
 
     public void MakeStep() 
     {
-        transform.position += movementDirection * GetSpeed() * Time.deltaTime;
+        transform.position += movementDirection * speed * Time.deltaTime;
     }
 
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
-        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.SetValue(maxHealth, health);
         if (health <= 0)
         {
             Die();
         }
-    }
-
-    public int GetDamageAmount() 
-    {
-        return damageAmount;
-    }
-
-    public float GetSpeed()
-    {
-        return speed;
-    }
-
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
-    public int GetValue()
-    {
-        return value;
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
     }
 }

@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0c814bc2f43bb4fa9b29a4de4afc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerPosition: {fileID: 1502919257331861023}
 --- !u!1 &4460574284904303489
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,10 +314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b803d7f4cc8d42344b751eb54a4db312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 7
-  damageAmount: 3
+  MaxHealth: 7
+  DamageAmount: 3
   attackZone: {fileID: 8810396824539203040}
-  attackInterval: 1.2
+  attackInterval: 1.6
   projectilePrefab: {fileID: 2358695110610566262, guid: 442750e241f4eb14cbf73eab29a3db72, type: 3}
   projectileStartPosition: {fileID: 6745273606847900486}
   hpBar: {fileID: 3026991063819053362}

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 public class RangeTower : MonoBehaviour, ITower
 {
-    public int maxHealth = 10;
-    public int damageAmount = 4;
+    public int MaxHealth = 10;
+    public int maxHealth => MaxHealth;
+    public int DamageAmount = 4;
+    public int damageAmount => DamageAmount;
     public AttackZone attackZone;
     public float attackInterval = 1f;
     public GameObject projectilePrefab;
@@ -12,19 +14,19 @@ public class RangeTower : MonoBehaviour, ITower
     private float attackCooldown = 0f;
     private List<IEnemy> enemiesInRange = new List<IEnemy>();
     private int health;
-    private bool mount = false;
+    public bool mount { get; set; } = false;
     public HPBar hpBar;
 
     void Start()
     {
-        health = GetMaxHealth();
-        hpBar.SetValue(GetMaxHealth(), health);
+        health = maxHealth;
+        hpBar.SetValue(maxHealth, health);
         hpBar.Hide();
     }
 
     void Update()
     {
-        if (!HasTargetsInAttackRange() || !IsMount())
+        if (!HasTargetsInAttackRange() || !mount)
         {
             return;
         }
@@ -52,11 +54,7 @@ public class RangeTower : MonoBehaviour, ITower
 
     private IEnemy GetEnemyToAttack()
     {
-        if (attackZone.Enemies.Count > 0) 
-        {
-            return attackZone.Enemies[0];
-        }
-        return null;
+        return attackZone.GetClosestEnemy();
     }
 
     public void Die()
@@ -78,7 +76,7 @@ public class RangeTower : MonoBehaviour, ITower
         if (projectileScript != null)
         {
             projectileScript.SetTarget(enemy);
-            projectileScript.SetDamageAmount(GetDamageAmount());
+            projectileScript.damageAmount = damageAmount;
             projectileScript.Fly();
         }
     }
@@ -86,11 +84,6 @@ public class RangeTower : MonoBehaviour, ITower
     public void Attack(IEnemy enemy)
     {
         ThrowProjectile(enemy);
-    }
-
-    public int GetDamageAmount()
-    {
-        return damageAmount;
     }
 
     public void Mount()
@@ -105,20 +98,10 @@ public class RangeTower : MonoBehaviour, ITower
         hpBar.Hide();
     }
 
-    public bool IsMount()
-    {
-        return mount;
-    }
-
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
-        hpBar.SetValue(GetMaxHealth(), health);
+        hpBar.SetValue(maxHealth, health);
         if (health <= 0) 
         {
             hpBar.Hide();

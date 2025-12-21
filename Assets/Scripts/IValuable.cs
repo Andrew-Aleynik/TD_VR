@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IValuable
 {
-    int GetValue();
+    int value { get; }
 }
